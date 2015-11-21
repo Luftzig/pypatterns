@@ -113,7 +113,14 @@ def test_has_with_predicate():
 
 
 def test_with_regex_matching():
-    assert 0
+    def f(s):
+        return s
+    g = guard(Any.re('A|B'))(f)
+    with pytest.raises(NoMatch):
+        g('Cat')
+    with pytest.raises(NoMatch):
+        g('CAT')
+    assert g('About') == 'About'
 
 
 def test_any_of_legal_values():
@@ -125,7 +132,17 @@ def test_with_keyword_args():
 
 
 def test_check_varargs():
-    assert 0
+    def count_args(*args):
+        return len(args)
+    g = guard(1, Any.args(Any(int)))(count_args)
+    with pytest.raises(NoMatch):
+        g(0)
+    with pytest.raises(NoMatch):
+        g(1, 'a')
+    with pytest.raises(NoMatch):
+        g(1, *(['a'] * 20))
+    assert g(1, 2, 3) == 3
+    assert g(*([1] * 20)) == 20
 
 
 def test_check_variable_keyword_args():
