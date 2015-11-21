@@ -131,3 +131,23 @@ def test_check_varargs():
 def test_check_variable_keyword_args():
     assert 0
 
+
+def test_any_with_no_types():
+    def f(x):
+        return x
+    g = guard(Any())(f)
+    assert g(3) == 3
+
+
+def test_none_as_literal():
+    def f(x):
+        return x is None
+    g = guard(None)(f)
+    with pytest.raises(NoMatch):
+        g(True)
+    assert g(None)
+
+
+def test_any_with_none_object():
+    assert 0
+

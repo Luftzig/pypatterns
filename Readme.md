@@ -49,11 +49,6 @@ callable so take caution when using objects that are comparable only by their
 if it can be passed to the function. The test function must accept one argument
 and return True if argument can be passed to the decorated function or False otherwise.
 
-#### Types
-If the arguments used in `guard` are types (i.e. `int`, `str` or custom class)
-then the argument will be matched if it is of the same type as the one passed
-to `guard`. Effectively this is PEP-443.
-
 #### The `Any` Object
 The special object `Any`, when used as an argument to `guard` will match any
 value. `Any(t)` for type `t` will match any object which is is an instance or
