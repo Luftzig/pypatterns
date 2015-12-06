@@ -84,6 +84,15 @@ def test_type_predicate():
     assert g('eeky', 3) == 'eekyeekyeeky'
 
 
+def test_literal_type_is_treated_as_object():
+    def f(obj, int_type):
+        return int_type(obj)
+    g = guard(Any, int)(f)
+    with pytest.raises(NoMatch):
+        g('1234', float)
+    assert g('1234', int) == 1234
+
+
 def test_has_attribute_predicate():
     def f(x):
         return x.count(2)
@@ -123,10 +132,12 @@ def test_with_regex_matching():
     assert g('About') == 'About'
 
 
+@pytest.mark.skipif(True, reason="TBD")
 def test_any_of_legal_values():
     assert 0
 
 
+@pytest.mark.skipif(True, reason="TBD")
 def test_with_keyword_args():
     assert 0
 
@@ -145,6 +156,7 @@ def test_check_varargs():
     assert g(*([1] * 20)) == 20
 
 
+@pytest.mark.skipif(True, reason="TBD")
 def test_check_variable_keyword_args():
     assert 0
 
@@ -165,6 +177,7 @@ def test_none_as_literal():
     assert g(None)
 
 
+@pytest.mark.skipif(True, reason="TBD")
 def test_any_with_none_object():
     assert 0
 

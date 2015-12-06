@@ -42,8 +42,9 @@ def test_combining_module_scope_patterns():
         top_scope()
 
 
+@pytest.mark.skipif(True, reason="TBD")
 def test_combining_methods():
-    class A():
+    class A(object):
         @guard(Any(str), Any(str))
         def m(self, s1, s2):
             return s1 + s2

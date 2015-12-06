@@ -59,7 +59,7 @@ class Any(object):
 
 
 def _bake_predicate(p):
-    if callable(p):
+    if (type(p) != type or p == Any) and callable(p):
         return p
     else:
         return lambda a: a == p
